@@ -66,3 +66,32 @@ curl -I http://localhost:3000
 
 ---
 *Last Updated: 2026-04-24*
+
+---
+
+## 🏆 Challenge Log: OWASP Juice Shop
+
+This section tracks my progress through the security challenges and explains the "Why" and "How" for beginners.
+
+### Challenge 1: Finding the Score Board ⭐
+**Goal:** Find the hidden page that tracks all your progress in the shop.
+
+#### 🕵️ How to Detect (The "Cyber Mindset")
+If you are new to security, the first thing to realize is that **developers often hide things in plain sight**. 
+1. Open the website in your browser.
+2. Right-click anywhere and select **"Inspect"** or **"View Page Source"**.
+3. Search (Ctrl+F) for the word "score". You will often find references to "score-board" in the JavaScript files or menu configurations that aren't visible on the main screen.
+
+#### ✅ The Solution
+Simply add `/#/score-board` to the end of your URL:
+- **URL:** `http://localhost:3000/#/score-board`
+The page will load, and you will receive your first success notification!
+
+#### 💻 The Coding Challenge (The "Fix")
+Once you find the board, Juice Shop may offer a "Coding Challenge" to fix the vulnerability.
+- **The Problem:** The "Score Board" was only hidden because it wasn't in the menu. Any user who guessed the URL could see it. This is called **"Security through Obscurity"**, and it is not real security.
+- **The Fix:** In the coding challenge interface:
+  1. **Identify the vulnerability:** Look for the routing file (usually `app-routing.module.ts` or similar).
+  2. **Select the fix:** The correct fix is to add an **Authorization Guard** to the route. This ensures that only users with "Admin" roles can even trigger the code that loads the Score Board.
+
+---
